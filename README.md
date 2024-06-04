@@ -1,2 +1,3 @@
-# apricot-project-parent
-apricot project parent
+# apricot-project
+
+apricot project dependencies management.
