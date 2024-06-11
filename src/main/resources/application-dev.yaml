@@ -1,0 +1,4 @@
+spring:
+  datasource:
+    url: jdbc:sqlite:apricot.db
+    driver-class-name: org.sqlite.JDBC

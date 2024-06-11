@@ -3,9 +3,9 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <groupId>org.springframework.cloud</groupId>
-    <artifactId>spring-cloud-starter-parent</artifactId>
-    <version>2023.0.2</version>
+    <groupId>icu.azusachino</groupId>
+    <artifactId>iris-project</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
     <relativePath />
   </parent>
 
@@ -19,18 +19,7 @@
     <java.version>21</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <mybatis-plus.version>3.5.6</mybatis-plus.version>
   </properties>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>com.baomidou</groupId>
-        <artifactId>mybatis-plus-boot-starter</artifactId>
-        <version>${mybatis-plus.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
   <dependencies>
     <!-- spring boot -->
@@ -65,21 +54,32 @@
       <artifactId>spring-cloud-starter-bootstrap</artifactId>
     </dependency>
 
+    <!-- core -->
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.xerial</groupId>
+      <artifactId>sqlite-jdbc</artifactId>
     </dependency>
     <dependency>
       <groupId>com.baomidou</groupId>
       <artifactId>mybatis-plus-boot-starter</artifactId>
     </dependency>
 
+    <!-- utils -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+    </dependency>
+
     <!-- test -->
     <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-test</artifactId>
-        <scope>test</scope>
-      </dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <profiles>
@@ -112,6 +112,7 @@
         <directory>src/main/resources</directory>
       </resource>
     </resources>
+
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
@@ -120,7 +121,12 @@
           <mainClass>icu.azusachino.apricot.ApricotApplication</mainClass>
           <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
           <executable>true</executable>
-      </configuration>
+        </configuration>
+      </plugin>
+      <!-- native image plugin -->
+      <plugin>
+        <groupId>org.graalvm.buildtools</groupId>
+        <artifactId>native-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>

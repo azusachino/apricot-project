@@ -1,3 +1,7 @@
 # apricot-project
 
-TODO
+sample project built with springboot.
+
+## references
+
+- [project parent](https://github.com/azusachino/iris-project)

@@ -1,3 +1,9 @@
 spring:
   application:
     name: apricot-project
+  datasource:
+    url: jdbc:sqlite:apricot.db
+    driver-class-name: org.sqlite.JDBC
+
+logging:
+  config: classpath:logback-spring.xml

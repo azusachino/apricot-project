@@ -4,3 +4,9 @@ tasks:
   build:
     cmds:
       - "mvn clean install -Dskiptests -Pdev"
+  native:
+    cmds:
+      ## docker image ⬇️
+      # mvn -Pnative spring-boot:build-image
+      ## executable
+      - mvn clean -Pnative native:compile
