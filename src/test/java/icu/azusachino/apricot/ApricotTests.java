@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test;
 /**
  * unit tests
  */
-public class ApricotTests {
+class ApricotTests {
 
     @Test
     void tests() {
-        var s = "hello world";
+        String s = "hello world";
         Assertions.assertNotNull(s);
     }
 }
