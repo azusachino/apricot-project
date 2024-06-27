@@ -1,7 +1,11 @@
 # apricot-project
 
-sample project built with springboot.
+- aeron + raft
+- disruptor (ring buffer)
 
 ## references
 
-- [project parent](https://github.com/azusachino/iris-project)
+- [iris-project](https://github.com/azusachino/iris-project)
+- [disruptor](https://lmax-exchange.github.io/disruptor/)
+- [disruptor spring boot](https://github.com/hiwepy/disruptor-spring-boot-starter)
+- [aeron](https://github.com/real-logic/aeron)

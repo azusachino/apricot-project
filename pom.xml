@@ -1,25 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <groupId>icu.azusachino</groupId>
     <artifactId>iris-project</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <relativePath />
+    <relativePath/>
   </parent>
 
-  <groupId>icu.azusachino</groupId>
   <artifactId>apricot-project</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <modelVersion>4.0.0</modelVersion>
   <description>a sample project</description>
 
   <properties>
-    <java.version>21</java.version>
+    <java.version>17</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <!-- custom deps -->
+    <disruptor-spring.version>2.0.1-SNAPSHOT</disruptor-spring.version>
   </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.github.hiwepy</groupId>
+        <artifactId>disruptor-spring-boot-starter</artifactId>
+        <version>${disruptor-spring.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <!-- spring boot -->
@@ -41,10 +53,6 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-actuator</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-redis</artifactId>
     </dependency>
 
@@ -56,30 +64,45 @@
 
     <!-- core -->
     <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <scope>runtime</scope>
     </dependency>
     <dependency>
-      <groupId>org.xerial</groupId>
-      <artifactId>sqlite-jdbc</artifactId>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>com.baomidou</groupId>
       <artifactId>mybatis-plus-boot-starter</artifactId>
     </dependency>
 
+    <!-- critical components -->
+    <dependency>
+      <groupId>io.aeron</groupId>
+      <artifactId>aeron-all</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.lmax</groupId>
+      <artifactId>disruptor</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.hiwepy</groupId>
+      <artifactId>disruptor-spring-boot-starter</artifactId>
+    </dependency>
     <!-- utils -->
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
     </dependency>
-
     <!-- test -->
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+      </dependency>
   </dependencies>
 
   <profiles>
@@ -90,7 +113,7 @@
       </activation>
       <properties>
         <env>dev</env>
-        <props></props>
+        <props>dev</props>
       </properties>
       <build>
         <finalName>apricot-application</finalName>
@@ -101,6 +124,22 @@
           </resource>
         </resources>
       </build>
+    </profile>
+
+    <profile>
+      <id>macos</id>
+      <activation>
+        <os>
+          <family>mac</family>
+        </os>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>io.netty</groupId>
+          <artifactId>netty-resolver-dns-native-macos</artifactId>
+          <optional>true</optional>
+        </dependency>
+      </dependencies>
     </profile>
   </profiles>
 

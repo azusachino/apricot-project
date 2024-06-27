@@ -1,4 +1,15 @@
 spring:
   datasource:
-    url: jdbc:sqlite:apricot.db
-    driver-class-name: org.sqlite.JDBC
+    hikari:
+      jdbc-url: jdbc:h2:mem:test_db
+      driver-class-name: org.h2.Driver
+      username: ${DB_USERNAME}
+      password: ${DB_PASS}
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      password: ${REDIS_PASSWORD}
+
+  disruptor:
+    enabled: true
+    ring-buffer: true

@@ -1,18 +1,18 @@
-# build stage
-FROM openjdk:21 as builder
-
+FROM amazoncorretto:17-al2-jdk AS builder
 WORKDIR /app
 
-COPY src/ /app/src
+# update the base container
+RUN "apk update && apk install apache-maven"
+
 COPY pom.xml /app/pom.xml
+COPY src /app/src
 
-RUN ["mvn", "clean", "compile:native", "-DskipTests"]
+RUN ["mvn", "install", "-DskipTests"]
 
-# runtime container
-FROM debian:buster
+
+FROM amazoncorretto:17-alpine3.19-jdk
 
 WORKDIR /app
+COPY builder:/app/target/apricot-project.jar /app/app.jar
 
-COPY builder:/app/target/apricot-project /app/apricot
-
-ENTRYPOINT ["/app/apricot"]
+ENTRYPOINT ["entrypoint.sh"]
