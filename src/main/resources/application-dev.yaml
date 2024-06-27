@@ -13,3 +13,6 @@ spring:
   disruptor:
     enabled: true
     ring-buffer: true
+logging:
+  file:
+    path: ./logs

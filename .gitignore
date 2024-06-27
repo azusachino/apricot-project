@@ -16,8 +16,11 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
+# folders
 .idea/
 logs/
+logging.path_IS_UNDEFINED/
 
 # files
+local.env
 .env

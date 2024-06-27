@@ -17,7 +17,7 @@ public class SpringRunner implements ApplicationRunner {
     private static final Logger LOGGER = LoggerFactory.getLogger(SpringRunner.class);
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
         LOGGER.info("spring runner is active");
     }
 
