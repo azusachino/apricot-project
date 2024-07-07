@@ -10,6 +10,10 @@ public class ApricotEvent {
     private String key;
     private String value;
 
+    public static ApricotEvent defaultEvent() {
+        return new ApricotEvent();
+    }
+
     public String getId() {
         return id;
     }

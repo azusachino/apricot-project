@@ -10,9 +10,6 @@ spring:
       host: ${REDIS_HOST}
       password: ${REDIS_PASSWORD}
 
-  disruptor:
-    enabled: true
-    ring-buffer: true
 logging:
   file:
     path: ./logs

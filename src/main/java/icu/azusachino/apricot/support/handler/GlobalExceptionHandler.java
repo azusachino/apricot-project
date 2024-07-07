@@ -14,12 +14,12 @@ public class GlobalExceptionHandler {
 
     /**
      * default handler for exception
-     * 
+     *
      * @param e ex
      * @return 500 response
      */
     @ExceptionHandler(Exception.class)
-    ResponseEntity<Map<String, ?>> exceptionHandler(Exception e) {
+    ResponseEntity<Map<String, String>> exceptionHandler(Exception e) {
         return ResponseEntity.internalServerError().body(Map.of("msg", e.getLocalizedMessage()));
     }
 }
